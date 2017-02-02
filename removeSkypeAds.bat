@@ -11,20 +11,17 @@ if '%errorlevel%' NEQ '0' (
     goto UACPrompt
 ) else ( goto gotAdmin )
 
-:UACPrompt 
+:UACPrompt
 echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
     set params = %*:"=""
     echo UAC.ShellExecute "cmd.exe", "/c %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
-
     "%temp%\getadmin.vbs"
     del "%temp%\getadmin.vbs"
     exit /B
-
 :gotAdmin
     pushd "%CD%"
     CD /D "%~dp0"
 :--------------------------------------
-
 (
 echo 127.0.0.1 localhost
 echo 127.0.0.1 rad.msn.com
